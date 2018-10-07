@@ -2,4 +2,4 @@
 
 Este repositório é destinado a armazenar código em shell script.
 
-* Spotify
+* Spotify - Instala o Spotify Music ( Debian )

@@ -2,4 +2,9 @@
 
 Este repositório é destinado a armazenar código em shell script.
 
-* Spotify - Instala o Spotify Music ( Debian )
+### Instalação
+
+Os scripts abaixo executam a instalação de programas.
+
+* Spotify - Instala o Spotify Music
+* Telegram - Instala o mensageiro Telegram

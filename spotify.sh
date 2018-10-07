@@ -5,7 +5,7 @@ if [ $(id -u) -eq 0 ]; then
         echo "Erro: Chave de instalação não informada."
         echo 
         echo "Voce precisa informar uma chave para instalação do Spofify."
-        echo "Acess: https://www.spotify.com/br/download/linux/ para adquiri-la."
+        echo "Acesse: https://www.spotify.com/br/download/linux/ para adquiri-la."
         exit;
     else
         echo "Instalando dependencias..."

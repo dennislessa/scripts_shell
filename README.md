@@ -8,3 +8,4 @@ Os scripts abaixo executam a instalação de programas.
 
 * Spotify - Instala o Spotify Music
 * Telegram - Instala o mensageiro Telegram
+* LAMP - Instala o LAMP (Linux + Apache2 + MariaDB + PHP)

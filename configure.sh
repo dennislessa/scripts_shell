@@ -1,10 +1,5 @@
 #!/bin/bash
 
-function _getUserEx
-{
-    getent passwd "$1" >/dev/null 2>&1
-}
-
 if [ $(id -u) -eq 0 ]; then
     if [ "$1" != "--pulse-configure" ] && [ "$1" != "" ]; then
         echo "Argumento nao existe."

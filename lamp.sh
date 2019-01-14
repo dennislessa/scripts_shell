@@ -27,9 +27,12 @@ if [ $(id -u) -eq 0 ]; then
     apt install php php-mysql -y
     
     echo "Alterando permissões..."
+    nano /etc/apache2/sites-available/000-default.conf
+    nano /etc/php/7.0/apache2/php.ini
     chown www-data:www-data -R /var/www/
     chown -R $1 /var/www
     chmod -R 755 /var/www
+    service apache2 restart
     
     echo 
     echo "Instalação concluída."

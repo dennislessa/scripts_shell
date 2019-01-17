@@ -1,18 +1,6 @@
 #!/bin/bash
 
 if [ $(id -u) -eq 0 ]; then
-    if [ "$1" != "--pulse-configure" ] && [ "$1" != "" ]; then
-        echo "Argumento nao existe."
-        echo "Instalação abortada."
-        exit;
-    fi;
-    
-    if [ "$1" = "--pulse-configure" ] && [ "$(cat /etc/passwd| grep -i $2| wc -l)" != "1" ]; then
-        echo "Informe o segundo argumento (nome do usuário válido)."
-        echo "Instalação abortada."
-        exit;
-    fi;
-
     echo "Atualizando o sistema..."
     apt update && apt dist-upgrade -y
     
@@ -34,21 +22,6 @@ if [ $(id -u) -eq 0 ]; then
                 intel-gpu-tools \
                 build-essential \
                 phonon-backend-vlc -y
-    
-    if [ "$1" = "--pulse-configure" ] && [ "$(cat /etc/passwd| grep -i $2| wc -l)" = "1" ]; then
-        echo "Configurando Pulse Audio..."
-        echo "" >> /etc/pulse/daemon.conf
-        echo "flat-volumes = no" >> /etc/pulse/daemon.conf
-        echo "enable-deferred-volume = no" >> /etc/pulse/daemon.conf
-
-        su - $2
-        pulseaudio -k && pulseaudio --start
-        
-        echo "Pulse Audio configurado."
-        echo "Instalação finalizada."
-    else
-        echo "usuario nao existe"
-    fi;
 else
     echo "Você precisa ter permissão de administrador."
     echo "Instalação cancelada."

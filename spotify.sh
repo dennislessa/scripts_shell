@@ -5,7 +5,7 @@ if [ $(id -u) -eq 0 ]; then
     apt install dirmngr -y
     
     echo "Instalando Spotify..."
-    apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 931FF8E79F0876134EDDBDCCA87FF9DF48BF1C9
+    apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 931FF8E79F0876134EDDBDCCA87FF9DF48BF1C90
     echo deb http://repository.spotify.com stable non-free | tee /etc/apt/sources.list.d/spotify.list
     apt update
     apt install spotify-client -y

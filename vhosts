@@ -1,0 +1,58 @@
+#!/bin/sh
+
+delete_host()
+{
+    if [ -f "/etc/apache2/sites-available/$1.conf" ]; then
+        echo "Deleting host..."
+        
+        a2dissite $1.conf
+        
+        rm /etc/apache2/sites-available/$1.conf
+        rm -r /var/www/$1/public_html
+        
+        service apache2 restart
+        
+        echo "Host was deleted."
+    fi;
+}
+
+new_host()
+{
+    echo "Creating new server..."
+    
+    mkdir -p /var/www/$1/public_html
+    touch /etc/apache2/sites-available/$1.conf
+
+    echo "<VirtualHost *:80>" >> /etc/apache2/sites-available/$1.conf
+    echo "  ServerAdmin dennislessa.dourado@gmail.com" >> /etc/apache2/sites-available/$1.conf
+    echo "  ServerName $2" >> /etc/apache2/sites-available/$1.conf
+    echo "  ServerAlias $2" >> /etc/apache2/sites-available/$1.conf
+    echo "  DocumentRoot /var/www/$1/public_html" >> /etc/apache2/sites-available/$1.conf
+    echo "  ErrorLog ${APACHE_LOG_DIR}/error.log" >> /etc/apache2/sites-available/$1.conf
+    echo "  CustomLog ${APACHE_LOG_DIR}/access.log combined" >> /etc/apache2/sites-available/$1.conf
+    echo "</VirtualHost>" >> /etc/apache2/sites-available/$1.conf
+
+    a2ensite $1.conf
+
+    echo "127.0.0.1 $2" >> /etc/hosts
+
+    service apache2 restart
+    
+    echo "New server created."
+}
+
+# Vitual Host
+#
+# Commands:
+#
+# - new: vhosts new <DIR_NAME> <SERVER_NAME>
+# - delete: vhosts delete <DIR_NAME>
+
+case $1 in
+    "new")
+        new_host $2 "$2.localhost";
+        ;;
+    "delete")
+        delete_host $2;
+        ;;
+esac
